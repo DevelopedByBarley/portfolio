@@ -1,17 +1,15 @@
 
-import { useEffect } from 'react'
-import './App.css'
-import axios from 'axios'
+import './App.css';
+import Navbar from './components/Navbar';
 
 function App() {
-  useEffect(() => {
-    axios.get('/test').then(res => console.log(res.data));
-  }, [])
-
 
   return (
-    <h1 className='bg-red-500'>Hello</h1>
-  )
+    <>
+      <Navbar />
+
+    </>
+  );
 }
 
-export default App
+export default App;
