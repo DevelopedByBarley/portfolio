@@ -2,6 +2,7 @@
 import './App.css';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import MainLayout from './layout/MainLayout';
+import Main from './pages/Main';
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
     createRoutesFromElements(
       <>
         <Route element={<MainLayout />} >
-          <Route path='/' element={<h1>Hello</h1>} />
+          <Route path='/' element={<Main />} />
         </Route>
       </>
     )

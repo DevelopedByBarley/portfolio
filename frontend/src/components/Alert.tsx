@@ -1,22 +1,20 @@
+interface AlertProps {
+  title: string;
+  bgColor: string; // Allow any string, which can be any valid Tailwind class
+  children: React.ReactNode;
+}
 
-
-export default function Alert({ title, children }: { title: string, children: React.ReactNode }) {
-
-  
-
-
-
+export default function Alert({ title, bgColor, children }: AlertProps) {
   return (
-    <div id="alert" className="min-h-screen bg-slate-800/70 flex items-center justify-center flex-col fixed top-0 left-0 w-screen backdrop-blur">
+    <div id="alert" className={`min-h-screen flex items-center justify-center flex-col fixed top-0 left-0 w-screen bg-${bgColor} backdrop-blur`}>
       <h1 className="text-7xl text-mainOrange font-pricedown">{title}</h1>
       <div className="w-3/5 mt-3">
         <hr className="bg-white p-.5 w-full mt-5" />
-        <p className="text-white my-4 text-center">
+        <div className="text-white my-4 text-center">
           {children}
-        </p>
+        </div>
         <hr className="bg-white p-.5 w-full mt-5" />
       </div>
-
     </div>
-  )
+  );
 }
