@@ -33,7 +33,7 @@
                             <ul class="timeline">
                                 <?php foreach ($admin_activities as $activity) : ?>
                                     <li class="timeline-item mb-3 d-flex gap-3">
-                                        <img src="/public/assets/images/avatars/<?= $activity['avatar'] ?>.png" alt="" style="width: 30px; height: 30px" class="rounded-circle" />
+                                        <img src="/public/resources/images/avatars/<?= $activity['avatar'] ?>.png" alt="" style="width: 30px; height: 30px" class="rounded-circle" />
                                         <div>
                                             <p class="text-muted m-0 fw-bold"><?= $activity['created_at'] ?></p>
                                             <h6 class="m-0 fw-light"><span class="green-500 fw-bold"><?= $activity['admin_name'] ?> </span><?= $activity['content'] ?></h6>

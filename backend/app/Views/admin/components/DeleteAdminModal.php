@@ -12,7 +12,7 @@ $csrf = $params['csrf'] ?? null;
             </div>
             <div class="modal-body">
                 <div class="d-flex flex-column align-items-center text-center p-3 pt-5">
-                    <img class="rounded-circle mt-5" width="150px" src="/public/assets/images/avatars/<?= $current_admin['avatar'] ?>.png">
+                    <img class="rounded-circle mt-5" width="150px" src="/public/resources/images/avatars/<?= $current_admin['avatar'] ?>.png">
                     <div class="mt-2">
                         <span class="fw-bold text-xl"><?= $current_admin['name'] ?></span>
                         <span>(Level <?= $current_admin['level'] ?>)</span>

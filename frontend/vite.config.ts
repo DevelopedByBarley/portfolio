@@ -7,5 +7,13 @@ export default defineConfig({
   build: {
     outDir: '../backend/public/dist',
     emptyOutDir: true,
-  }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080/backend',
+        changeOrigin: true,
+      },
+    },
+  },
 })

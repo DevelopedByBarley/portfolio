@@ -61,7 +61,7 @@
                                     <div class="form-check form-check-inline image-radio">
                                         <input required class="form-check-input" type="radio" name="avatar-radio" id="avatar_radio-<?php echo $avatar; ?>" value="<?php echo $avatar; ?>">
                                         <label class="form-check-label" for="avatar_radio-<?php echo $avatar; ?>">
-                                            <img src="/public/assets/images/avatars/<?php echo $avatar; ?>.png" class="h-45 w-45" alt="<?php echo ucfirst($avatar); ?>">
+                                            <img src="/public/resources/images/avatars/<?php echo $avatar; ?>.png" class="h-45 w-45" alt="<?php echo ucfirst($avatar); ?>">
                                         </label>
                                     </div>
                                 </div>

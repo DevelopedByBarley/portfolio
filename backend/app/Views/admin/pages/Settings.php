@@ -9,7 +9,7 @@ $level = $admin['level'] ?? null;
     <div class="row dark-bg-gray-900 min-h-95 py-5">
         <div class="col-12 shadow dark-bg-gray-800 py-5 <?= (int)$level === 3 ? 'col-lg-3 offset-xl-2' : '' ?>">
             <div class="d-flex flex-column align-items-center text-center p-3 pt-5">
-                <img class="rounded-circle mt-5" width="150px" src="/public/assets/images/avatars/<?= $admin['avatar'] ?>.png">
+                <img class="rounded-circle mt-5" width="150px" src="/public/resources/images/avatars/<?= $admin['avatar'] ?>.png">
                 <div class="mt-2"><span class="fw-bold text-xl"><?= $admin['name'] ?></span> <span>(Level <?= $level ?>)</span></div><span><?= $admin['email'] ?></span><span> </span>
                 <div class="mt-1 badge bg-sky-500 p-2">
                     (<?= $admin['created_at'] ?>)
@@ -41,7 +41,7 @@ $level = $admin['level'] ?? null;
                                         <tr>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <img src="/public/assets/images/avatars/<?= $current_admin['avatar'] ??  'https://mdbootstrap.com/img/new/avatars/6.jpg' ?>.png" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+                                                    <img src="/public/resources/images/avatars/<?= $current_admin['avatar'] ??  'https://mdbootstrap.com/img/new/avatars/6.jpg' ?>.png" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
                                                     <div class="ms-3">
                                                         <p class="fw-bold mb-1"><?= htmlspecialchars($current_admin['name']) ?></p>
                                                         <p class="text-muted mb-0"><?= htmlspecialchars($current_admin['email']) ?></p>

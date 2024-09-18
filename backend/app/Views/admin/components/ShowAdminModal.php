@@ -7,9 +7,9 @@
             </div>
             <div class="modal-body">
                 <div class="d-flex flex-column align-items-center text-center p-3">
-                    <img class="rounded-circle mt-5 mb-3" width="150px" src="/public/assets/images/avatars/<?= $current_admin['avatar'] ?>.png">
+                    <img class="rounded-circle mt-5 mb-3" width="150px" src="/public/resources/images/avatars/<?= $current_admin['avatar'] ?>.png">
                     <div class="mt-2"><span class="fw-bold text-xl"><?= $current_admin['name'] ?></span> <span>(Level <?= $level ?>)</span></div><span><?= $current_admin['email'] ?></span><span> </span>
-                    <div class="mt-1 badge bg-sky-500  p-2 mt-2">
+                    <div class="badge bg-sky-500  p-2 mt-2">
                         (<?= $current_admin['created_at'] ?>)
                     </div>
                 </div>

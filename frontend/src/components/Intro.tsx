@@ -1,14 +1,14 @@
-import  { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap';
 
-import background1 from '../assets/images/background1.jpg';
-import background2 from '../assets/images/background2.jpg';
-import background3 from '../assets/images/background3.jpg';
+import background1 from '/assets/images/background1.jpg';
+import background2 from '/assets/images/background2.jpg';
+import background3 from '/assets/images/background3.jpg';
 import { useCookies } from 'react-cookie';
 import { playOrStopThemeSound } from '../helpers/PlayAudio';
 
-export const Intro = () => {
-    const [cookies, setCookies] = useCookies(['visited']);
+export const Intro = ({ month }: { month: number }) => {
+    const [cookies, setCookies] = useCookies(['visited', 'intro']);
     const timeline = gsap.timeline({ repeat: 0 });
     const image1Ref = useRef(null);
     const image2Ref = useRef(null);
@@ -17,8 +17,10 @@ export const Intro = () => {
     const skipIntro = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
 
-        if(cookies.visited) {
-            setCookies('visited', 1);
+
+        if (cookies.intro) {
+
+            setCookies('visited', 1, { path: '/', expires: new Date(Date.now() + month) });
             playOrStopThemeSound('stop');
         }
     }
@@ -47,7 +49,7 @@ export const Intro = () => {
                 </div>
             </div>
             <div className='fixed bottom-10 right-20'>
-                <button onClick={skipIntro} className='font-semibold text-mainOrange shadow-sm underline text-xl'>Skip intro</button>
+                <button onClick={skipIntro} className='font-semibold text-white border border-mainOrange bg-mainDark md:hover:text-mainDark md:hover:bg-mainOrange md:transition duration-500 shadow-sm  text-xl p-3'>Skip intro</button>
             </div>
         </>
     )

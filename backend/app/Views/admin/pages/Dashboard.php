@@ -79,7 +79,7 @@ $barColors = [
       <div class="col-12 col-md-6 col-lg-6 col-xl-5 min-h-400 border bg-gray-50 dark-bg-gray-900 shadow-lg rounded-4 d-flex align-items-center justify-content-center justify-content-xl-start">
         <div class="admin-settings min-h-300 h-100 d-flex flex-column flex-xl-row align-items-center justify-content-center mx-3">
           <span>
-            <img src="/public/assets/images/avatars/<?= $admin['avatar'] ?>.png" alt="" style="width: 200px; height: 200px" class="rounded-circle mx-3" />
+            <img src="/public/resources/images/avatars/<?= $admin['avatar'] ?>.png" alt="" style="width: 200px; height: 200px" class="rounded-circle mx-3" />
           </span>
           <div>
             <p class="mb-0"><span class="fw-bolder text-3xl"><?= $admin['name'] ?></span> <span>(Level <?= $admin['level'] ?>)</span></p>
