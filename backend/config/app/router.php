@@ -11,6 +11,9 @@ function registerRoutes(FastRoute\RouteCollector $router)
   $router->addGroup('/', function (FastRoute\RouteCollector $r) {
     require_once 'routes/home.php';
   });
+  $router->addGroup('/skills', function (FastRoute\RouteCollector $r) {
+    require_once 'routes/skill.php';
+  });
   $router->addGroup('/feedback', function (FastRoute\RouteCollector $r) {
     require_once 'routes/feedback.php';
   });
@@ -44,7 +47,7 @@ switch ($routeInfo[0]) {
     $Controller = new Controller();
 
     header("HTTP/1.0 404 Not Found");
-    $Controller->error();
+    echo json_encode(['error' => 'error']);
     break;
   case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
     $allowedMethods = $routeInfo[1];

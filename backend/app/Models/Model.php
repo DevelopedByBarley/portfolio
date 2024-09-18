@@ -14,6 +14,7 @@ class Model
 
   public function __construct()
   {
+    
     DATABASE_PERM === 1 ? $this->Pdo = Database::getInstance() : null;
   }
 

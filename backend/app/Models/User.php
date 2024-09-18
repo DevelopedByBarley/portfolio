@@ -9,11 +9,10 @@ use PDOException;
 
 class User extends Model
 {
-  public function storeUser($body, $files)
+  public function storeUser($body, $fileName)
   {
     $email = filter_var($body["email"] ?? '', FILTER_SANITIZE_EMAIL);
     $pw = password_hash(filter_var($body["password"] ?? '', FILTER_SANITIZE_SPECIAL_CHARS), PASSWORD_DEFAULT);
-    $fileName = $this->FileSaver->saver($files['file'], 'uploads/images', null, ['image/png', 'image/jpeg']);
 
 
     $isUserExist = $this->selectByRecord('users', 'email', $email, PDO::PARAM_STR);

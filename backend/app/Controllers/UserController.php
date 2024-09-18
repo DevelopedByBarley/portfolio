@@ -75,10 +75,12 @@ class UserController extends Controller
     session_start();
     $this->CSRFToken->check();
 
-    $isSuccess = $this->User->storeUser($_POST, $_FILES);
-
+    $fileName = $this->FileSaver->saver($_FILES['file'], 'uploads/images', null, ['image/png', 'image/jpeg']);
+    $isSuccess = $this->User->storeUser($_POST, $fileName);
+    
     if (!$isSuccess) {
       $this->Toast->set('Regisztráció sikertelen, próbálja meg más adatokkal!', 'danger', '/user/register', null);
+      
     }
 
     $this->Toast->set('Regisztráció sikeres!', 'success', '/user/login', null);
