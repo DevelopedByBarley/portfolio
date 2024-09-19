@@ -5,9 +5,7 @@ import MainLayout from './layout/MainLayout';
 import Main from './pages/Main';
 
 function App() {
-
-
-
+  
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>

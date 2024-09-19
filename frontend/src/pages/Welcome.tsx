@@ -8,17 +8,19 @@ import { Intro } from "../components/Intro";
 
 export default function Welcome() {
     const [cookies, setCookies] = useCookies(['sound', 'intro', 'visited']);
-    const month = 30 * 24 * 60 * 60 * 1000;
     const [introCheckbox, setIntroCheckbox] = useState(false);
     const [soundCheckbox, setSoundCheckbox] = useState(false);
+    const month = 30 * 24 * 60 * 60 * 1000; // 30days
 
 
-    // Set visited cookie on page reload for stop intro
     useEffect(() => {
-        if (cookies.intro) {
+        if (cookies.intro && !cookies.visited) {
             setCookies('visited', 1, { path: '/', expires: new Date(Date.now() + month) });
         }
+    // eslint-disable-next-line
     }, []);
+    
+    
 
 
 

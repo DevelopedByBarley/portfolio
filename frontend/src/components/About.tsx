@@ -2,7 +2,6 @@
 export const About = () => {
     return (
         <div className='bg-mainLightDark text-center py-10 mt-20'>
-
             <div className="container mx-auto">
                 <div className='w-[85%] md:w-[75%]  mx-auto space-y-5'>
                     <h2 className='font-pricedown text-6xl text-mainOrange'>About</h2>

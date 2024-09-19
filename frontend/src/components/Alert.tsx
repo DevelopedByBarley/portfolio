@@ -1,6 +1,6 @@
 interface AlertProps {
   title: string;
-  bgColor: string; // Allow any string, which can be any valid Tailwind class
+  bgColor: string;
   children: React.ReactNode;
 }
 

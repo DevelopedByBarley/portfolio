@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="settings  flex items-center justify-center">
         <div >
           <IoSettings size={40} className="cursor-pointer text-white/70"
-            onMouseOver={() => {
+            onMouseEnter={() => {
               if (cookies.sound) {
                 playOrStopHoverSound('play');
               }

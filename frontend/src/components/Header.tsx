@@ -19,7 +19,7 @@ export const Header = () => {
             </div>
 
             {/* Right section with name and profession */}
-            <div className='xl:w-2/3 xl:flex items-center text-white'>
+            <div className='xl:w-2/3 xl:flex justify-around items-center text-white'>
                 <div className='text-center xl:text-start space-y-2 3xl:space-y-10'>
                     <h1 className='font-pricedown text-7xl xl:text-8xl 2xl:text-9xl 3xl:text-10xl'>SZANISZLÓ ÁRPÁD</h1>
                     <h2 className='font-pricedown text-3xl 2xl:text-5xl py-3'>FULL STACK WEB DEVELOPER</h2>

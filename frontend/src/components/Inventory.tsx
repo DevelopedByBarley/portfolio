@@ -1,73 +1,78 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { playOrStopHoverSound, playOrStopSelectSound } from "../helpers/PlayAudio";
+import { Spinner } from "./Spinner";
 
-// Definiáljuk a Skill típust
 interface Skill {
-    title: string;
-    percent: number;
-    content: string;
-    icon: string;
+	title: string;
+	percent: number;
+	content: string;
+	icon: string;
 }
 
 export const Inventory = () => {
-    // Kezdetben nincs kiválasztott gomb
-    const [skills, setSkills] = useState<Skill[]>([]);
-    const [currentIndex, setCurrentIndex] = useState<number>(0);
+	const [skills, setSkills] = useState<Skill[]>([]);
+	const [currentIndex, setCurrentIndex] = useState<number>(0);
+	const [pending, setPending] = useState(true);
 
-    const selectCurrentSkill = (e: React.MouseEvent<HTMLButtonElement>, index: number) => {
-        e.preventDefault();
-        setCurrentIndex(index);
-    }
+	const selectCurrentSkill = (e: React.MouseEvent<HTMLButtonElement>, index: number) => {
+		e.preventDefault();
+		setCurrentIndex(index);
+	}
 
-    useEffect(() => {
-        axios.get<{ skills: Skill[] }>('/api/skills').then(res => {
-            setSkills(res.data.skills);
-        });
-    }, []);
+	useEffect(() => {
+		axios.get<{ skills: Skill[] }>(import.meta.env.VITE_API_BASE_URL + "/skills").then(res => {
+			setSkills(res.data.skills);
+		}).finally(() => {
+			setTimeout(() => {
+				setPending(false)
+			}, 2000)
+		})
+	}, []);
 
-    console.log(skills[currentIndex]?.percent);
 
-    return (
-        <div className="bg-mainLightDark mt-20 text-white">
-            <div className="container mx-auto min-h-56 p-3">
-                <h3 className="title text-center mt-3 font-pricedown text-5xl">Inventory</h3>
-                <div className="grid lg:grid-cols-2">
-                    <div className="grid grid-cols-3 lg:grid-cols-5 max-h-52 overflow-y-auto md:overflow-hidden md:max-h-none md:h-max  w-max mx-auto mt-5">
-                        {skills.map((skill, index) => (
-                            <button
-                                key={index} // Ajánlott egyedi kulcsot használni
-                                className={`skill-box transition-all duration-200  h-20 w-20 m-2 bg-white/50 ${currentIndex === index ? 'border-2  border-mainOrange' : 'hover:border-2 hover:border-mainOrange'} `}
-                                onClick={(e) => {
-                                    selectCurrentSkill(e, index);
-                                    playOrStopSelectSound('play');
-                                }}
-                                onMouseOver={() => playOrStopHoverSound('play')}
-                            >
-                                <img src={`/api/backend/public/resources/uploads/icons/${skill.icon}`} className="w-12 mx-auto" alt="" />
-                            </button>
-                        ))}
-                    </div>
 
-                    <div className="mt-10">
-                        {currentIndex !== undefined && skills[currentIndex] && (
-                            <>
-                                <h3 className="title text-center lg:text-start mt-3 font-pricedown text-4xl">
-                                    {skills[currentIndex].title}
-                                </h3>
+	return (
+		<div className="bg-mainLightDark mt-20 text-white">
+			{pending ? <Spinner size={25} bgClass="h-96" /> : (
+				<div className="container mx-auto min-h-56 p-3">
+					<h3 className="title text-center mt-3 font-pricedown text-5xl">Inventory</h3>
+					<div className="grid lg:grid-cols-2">
+						<div className="grid grid-cols-3 lg:grid-cols-5 max-h-52 overflow-y-auto md:overflow-hidden md:max-h-none md:h-max  w-max mx-auto mt-5">
+							{skills.map((skill, index) => (
+								<button
+									key={index} // Ajánlott egyedi kulcsot használni
+									className={`skill-box transition-all duration-200  h-20 w-20 m-2 bg-white/50 ${currentIndex === index ? 'border-2  border-mainOrange' : 'hover:border-2 hover:border-mainOrange'} `}
+									onClick={(e) => {
+										selectCurrentSkill(e, index);
+										playOrStopSelectSound('play');
+									}}
+									onMouseEnter={() => playOrStopHoverSound('play')}>
+									<img src={`/api/backend/public/resources/uploads/icons/${skill.icon}`} className="w-12 mx-auto" alt="" />
+								</button>
+							))}
+						</div>
 
-                                <div className="w-full mt-5 bg-white/50 rounded-full h-2.5 dark:bg-gray-700">
-                                    <div className="bg-mainOrange h-2.5 rounded-full transition-all duration-500" style={{ width: `${skills[currentIndex]?.percent}%` }}></div>
-                                </div>
+						<div className="mt-10">
+							{currentIndex !== undefined && skills[currentIndex] && (
+								<>
+									<h3 className="title text-center lg:text-start mt-3 font-pricedown text-4xl">
+										{skills[currentIndex].title}
+									</h3>
 
-                                <p className="mt-5 p-2">
-                                    {skills[currentIndex].content}
-                                </p>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+									<div className="w-full mt-5 bg-white/50 rounded-full h-2.5 dark:bg-gray-700">
+										<div className="bg-mainOrange h-2.5 rounded-full transition-all duration-500" style={{ width: `${skills[currentIndex]?.percent}%` }}></div>
+									</div>
+
+									<p className="mt-5 p-2">
+										{skills[currentIndex].content}
+									</p>
+								</>
+							)}
+						</div>
+					</div>
+				</div>
+			)}
+		</div>
+	);
 };
