@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { playOrStopHoverSound, playOrStopSelectSound } from "../helpers/PlayAudio";
 import { Spinner } from "./Spinner";
+import { useCookies } from "react-cookie";
 
 interface Skill {
 	title: string;
@@ -14,6 +15,7 @@ export const Inventory = () => {
 	const [skills, setSkills] = useState<Skill[]>([]);
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [pending, setPending] = useState(true);
+	const [cookies] = useCookies(['sound']);
 
 	const selectCurrentSkill = (e: React.MouseEvent<HTMLButtonElement>, index: number) => {
 		e.preventDefault();
@@ -26,7 +28,7 @@ export const Inventory = () => {
 		}).finally(() => {
 			setTimeout(() => {
 				setPending(false)
-			}, 2000)
+			}, 1000)
 		})
 	}, []);
 
@@ -36,18 +38,20 @@ export const Inventory = () => {
 		<div className="bg-mainLightDark mt-20 text-white">
 			{pending ? <Spinner size={25} bgClass="h-96" /> : (
 				<div className="container mx-auto min-h-56 p-3">
-					<h3 className="title text-center mt-3 font-pricedown text-5xl">Inventory</h3>
+					<h3 className="title text-center xl:text-start xl:px-40 mt-3 font-pricedown text-5xl [text-shadow:0_5px_8px_rgb(0,0,0)]">Inventory</h3>
 					<div className="grid lg:grid-cols-2">
 						<div className="grid grid-cols-3 lg:grid-cols-5 max-h-52 overflow-y-auto md:overflow-hidden md:max-h-none md:h-max  w-max mx-auto mt-5">
 							{skills.map((skill, index) => (
 								<button
 									key={index} // Ajánlott egyedi kulcsot használni
-									className={`skill-box transition-all duration-200  h-20 w-20 m-2 bg-white/50 ${currentIndex === index ? 'border-2  border-mainOrange' : 'hover:border-2 hover:border-mainOrange'} `}
+									className={`skill-box transition-all duration-200 h-20 w-20 m-2 bg-white/50 ${currentIndex === index ? 'border-2  border-mainOrange' : 'hover:border-2 hover:border-mainOrange border-2 border-white '} `}
 									onClick={(e) => {
 										selectCurrentSkill(e, index);
-										playOrStopSelectSound('play');
+										if(cookies.sound) playOrStopSelectSound('play');
 									}}
-									onMouseEnter={() => playOrStopHoverSound('play')}>
+									onMouseEnter={() => {
+										if(cookies.sound) playOrStopHoverSound('play')
+									}}>
 									<img src={`/api/backend/public/resources/uploads/icons/${skill.icon}`} className="w-12 mx-auto" alt="" />
 								</button>
 							))}
@@ -56,7 +60,7 @@ export const Inventory = () => {
 						<div className="mt-10">
 							{currentIndex !== undefined && skills[currentIndex] && (
 								<>
-									<h3 className="title text-center lg:text-start mt-3 font-pricedown text-4xl">
+									<h3 className="title text-center lg:text-start mt-3 font-pricedown text-4xl [text-shadow:0_5px_8px_rgb(0,0,0)]">
 										{skills[currentIndex].title}
 									</h3>
 

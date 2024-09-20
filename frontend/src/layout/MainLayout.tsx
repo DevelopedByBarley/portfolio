@@ -1,13 +1,16 @@
 import { Outlet } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from "../components/Navbar";
 import Welcome from "../pages/Welcome";
+import { useCheat } from "../hooks/useCheat";
+import { useState } from "react";
+import CheatModal from "../components/CheatModal";
 
 const MainLayout = () => {
 
-
-
+  const [cheat, setCheat] = useState('');
+  const [showPassedModal, setShowPassedModal] = useState(false);
+  useCheat({ cheat, setCheat, setShowPassedModal })
 
   return (
     <>
@@ -21,7 +24,7 @@ const MainLayout = () => {
         pauseOnHover
       />
       <main>
-        <Navbar />
+        {showPassedModal && <CheatModal setShowPassedModal={setShowPassedModal}/>}
         <Welcome />
         <Outlet />
       </main>

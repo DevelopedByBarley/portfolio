@@ -1,8 +1,14 @@
-/* import { useEffect } from "react";
-import {  playThemSound } from "../helpers/PlayAudio";
+import { useEffect } from "react";
+import { playOrStopMissionPassed, playOrStopSelectSound } from "../helpers/PlayAudio";
+import { toast } from "react-toastify";
 
-export const useCheat = (cheat, setCheat, setShow) => {
-  
+type CheatType = {
+  cheat: string;
+  setCheat: React.Dispatch<React.SetStateAction<string>>; // Jobb típusmeghatározás
+  setShowPassedModal: React.Dispatch<React.SetStateAction<boolean>>; // Boolean típus pontosítása
+};
+
+export const useCheat = ({ cheat, setCheat, setShowPassedModal }: CheatType) => {
   const targetCode = 'hesoyam';
 
   useEffect(() => {
@@ -10,37 +16,32 @@ export const useCheat = (cheat, setCheat, setShow) => {
       setCheat(prev => prev + e.key);
     };
 
-    // Hozzáadjuk az eseménykezelőt
     window.addEventListener('keydown', handleKeyDown);
 
-    // Eltávolítjuk az eseménykezelőt a komponens elhagyásakor
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []); // Üres dependency array, hogy csak egyszer fusson le
+  }, [setCheat]); // Hozzáadva a setCheat függőségi tömbbe
 
-  if(cheat.endsWith('hesoyam')) {
-    playThemSound();
-    setShow(true);
-    setCheat('');
+  // Cheat kód ellenőrzés és akció végrehajtás
+  if (cheat.endsWith(targetCode)) {
+    toast.dark('Cheat activated!');
+    playOrStopSelectSound('play')
 
     setTimeout(() => {
-      setShow(false);
-    },4000)
+      
+      playOrStopMissionPassed('play');
+      setShowPassedModal(true);
+      setCheat('');
+    }, 1000)
 
     return true;
   }
 
-   if(cheat.length > targetCode.length ) {
-    
+  // Ha a cheat hosszabb mint a targetCode, a felesleges karaktereket levágjuk
+  if (cheat.length > targetCode.length) {
     setCheat(prev => prev.slice(-targetCode.length));
-  } 
+  }
 
-
-
-
-
-  if(cheat === targetCode) return true;
   return false;
 };
- */
