@@ -10,7 +10,7 @@ const MainLayout = () => {
 
   const [cheat, setCheat] = useState('');
   const [showPassedModal, setShowPassedModal] = useState(false);
-  useCheat({ cheat, setCheat, setShowPassedModal })
+  useCheat({ cheat, setCheat, showPassedModal, setShowPassedModal })
 
   return (
     <>
@@ -24,7 +24,7 @@ const MainLayout = () => {
         pauseOnHover
       />
       <main>
-        {showPassedModal && <CheatModal setShowPassedModal={setShowPassedModal}/>}
+        {showPassedModal && <CheatModal setShowPassedModal={setShowPassedModal} />}
         <Welcome />
         <Outlet />
       </main>

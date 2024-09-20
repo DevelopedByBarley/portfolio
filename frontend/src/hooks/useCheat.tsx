@@ -6,12 +6,16 @@ type CheatType = {
   cheat: string;
   setCheat: React.Dispatch<React.SetStateAction<string>>; // Jobb típusmeghatározás
   setShowPassedModal: React.Dispatch<React.SetStateAction<boolean>>; // Boolean típus pontosítása
+  showPassedModal: boolean
 };
 
-export const useCheat = ({ cheat, setCheat, setShowPassedModal }: CheatType) => {
+export const useCheat = ({ cheat, setCheat, showPassedModal,  setShowPassedModal }: CheatType) => {
   const targetCode = 'hesoyam';
 
   useEffect(() => {
+
+    if(showPassedModal) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       setCheat(prev => prev + e.key);
     };
@@ -21,10 +25,11 @@ export const useCheat = ({ cheat, setCheat, setShowPassedModal }: CheatType) => 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [setCheat]); // Hozzáadva a setCheat függőségi tömbbe
+  }, [setCheat, showPassedModal]); // Hozzáadva a setCheat függőségi tömbbe
 
-  // Cheat kód ellenőrzés és akció végrehajtás
+
   if (cheat.endsWith(targetCode)) {
+    
     toast.dark('Cheat activated!');
     playOrStopSelectSound('play')
 

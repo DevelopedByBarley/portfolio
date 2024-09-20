@@ -35,7 +35,7 @@ const CheatModal = ({ setShowPassedModal }: { setShowPassedModal: React.Dispatch
 
 
   return (
-    <div className='fixed h-screen w-screen backdrop-blur-lg bg-mainLightDark/60 flex items-center justify-center transition-all duration-300'>
+    <div className='fixed h-screen w-screen backdrop-blur-lg bg-mainLightDark/60 flex items-center justify-center transition-all duration-300 z-50'>
       <div className="container bg-mainLightDark mx-5 xl:w-1/3 xl:mx-auto min-h-96 rounded-xl p-3 xl:p-10  text-center text-white space-y-4 border-2 border-black">
         <div className="flex justify-end">
           <IoIosCloseCircle size={25} className="text-mainOrange cursor-pointer" onClick={handleCheatModal} />
